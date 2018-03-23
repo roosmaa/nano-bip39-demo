@@ -6,12 +6,44 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+	"regexp"
+	"strconv"
 	"strings"
 )
 
 const Hardened = uint32(0x80000000)
 
 type Bip32Path []uint32
+
+func Bip32PathFromString(path string) (Bip32Path, error) {
+	matched, err := regexp.MatchString("\\d+'?(/\\d+'?)*", path)
+	if err != nil {
+		return nil, err
+	}
+	if !matched {
+		return nil, errors.New("bip32: invalid path format")
+	}
+
+	steps := strings.Split(path, "/")
+	res := make(Bip32Path, len(steps))
+	for i, step := range steps {
+		if strings.HasSuffix(step, "'") {
+			v, err := strconv.ParseUint(step[:len(step)-1], 10, 32)
+			if err != nil {
+				return nil, err
+			}
+			res[i] = uint32(v) + Hardened
+		} else {
+			v, err := strconv.ParseUint(step, 10, 32)
+			if err != nil {
+				return nil, err
+			}
+			res[i] = uint32(v)
+		}
+	}
+
+	return res, nil
+}
 
 func (p Bip32Path) String() string {
 	arr := make([]string, len(p))

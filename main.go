@@ -17,11 +17,17 @@ var bip32Path = Bip32Path{
 
 func main() {
 	mnemonic := flag.String("mnemonic", "", "BIP39 mnemonic (required)")
-	password := flag.String("password", "", "BIP39 passphrase (optional)")
+	password := flag.String("password", "", "BIP39 passphrase")
+	path := flag.String("path", "44'/165'/0'", "BIP32 path to derive the key from")
 	flag.Parse()
 
 	if *mnemonic == "" {
 		panic("mnemonic argument missing")
+	}
+
+	bip32Path, err := Bip32PathFromString(*path)
+	if err != nil {
+		panic(err)
 	}
 
 	seed, err := bip39.NewSeedWithErrorChecking(*mnemonic, *password)
