@@ -8,6 +8,7 @@ Usage of the tool:
 
 ```
 $ go get github.com/roosmaa/nano-bip39-demo
+$ go install github.com/roosmaa/nano-bip39-demo
 $ nano-bip39-demo -mnemonic "edge defense waste choose enrich upon flee junk siren film clown finish luggage leader kid quick brick print evidence swap drill paddle truly occur" -password "some password"
 ```
 
