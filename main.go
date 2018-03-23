@@ -48,7 +48,6 @@ func main() {
 	fmt.Printf("Mnemonic: %#v\n", *mnemonic)
 	fmt.Printf("Password: %#v\n", *password)
 	fmt.Printf("Path: %s\n", bip32Path)
-	fmt.Printf("Chain code: %s\n", hex.EncodeToString(keyData.ChainCode))
 	fmt.Printf("Private key: %s\n", hex.EncodeToString(privateKey[:32]))
 	fmt.Printf("Public key: %s\n", hex.EncodeToString(publicKey))
 	fmt.Printf("Nano address: %s\n", nanoAddress)
