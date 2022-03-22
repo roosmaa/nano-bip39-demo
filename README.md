@@ -7,8 +7,7 @@ Note: Go Ed25519 library doesn't support using a hash other than SHA512, but Nan
 Usage of the tool:
 
 ```
-$ go get github.com/roosmaa/nano-bip39-demo
-$ go install github.com/roosmaa/nano-bip39-demo
+$ go install github.com/roosmaa/nano-bip39-demo@latest
 $ nano-bip39-demo -mnemonic "edge defense waste choose enrich upon flee junk siren film clown finish luggage leader kid quick brick print evidence swap drill paddle truly occur" -password "some password" -path "44'/165'/0'"
 ```
 
